@@ -17,7 +17,7 @@ const descripcion = process.argv[3];
 
 switch (accion) {
     case "listar".toLocaleLowerCase() :
-        listarTareas(tareas);
+        listarTareas();
         break;
 
     case "crear".toLocaleLowerCase() :

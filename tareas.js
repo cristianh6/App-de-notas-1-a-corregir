@@ -1,6 +1,5 @@
 // REQUERIMIENTOS //
 
-
 const fs = require("fs");
 
 const tareas = require("./tareas.json");
@@ -11,13 +10,14 @@ const procesos = require("process");
 
 const colores = require("colors");
 
+
 // LOGS //
 
 const acciones = ["\n1- Listar tareas existentes ->", "\n2- Crear nueva tarea ->", "\n3- Eliminar tarea deseada ->"]
 
 const [nodeLista, nodeCrea, nodeElimina] = ["node app listar", "node app crear", "node app eliminar"]
 
-const [listar, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow,acciones[2].yellow]
+const [listarr, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow,acciones[2].yellow]
 
 
 // FUNCIONES //
@@ -25,25 +25,17 @@ const [listar, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow,accion
 module.exports = {
     accionesDisponibles : () =>{
             console.log("\nEsta es la lista de acciones disponible: ".green);
-            console.log(listar, nodeLista, crear, nodeCrea, '"título de la tarea"', eliminar, nodeElimina, '"título de la tarea"');
+            console.log(listarr, nodeLista, crear, nodeCrea, '"título de la tarea"', eliminar, nodeElimina, '"título de la tarea"');
             console.log("\n----------------------------------------------------------".magenta);
             console.log("IMPORTANTE".red, "\nRecuerde especificar, luego de la acción a realizar, el título de la tarea entre comillas.")
             console.log("Todas las tareas que cree, serán almacenadas bajo el estado", "Pendiente".yellow+".");
     },
     
-    listarTareas : ((mostrarLista) => {
-        for(let i = 0; i <= tareas.length; i++){
-            if(mostrarLista){
-                mostrarLista.push(tareas[i])
-                return console.log(`${tareas[mostrarLista]}`)
-                
-            }else if(!i){
-                console.log("No hay tareas para mostrar")
-                return null
-            }
+    listarTareas : () => {
+        for(let i = 0; i < tareas.length; i++) {
+            return console.log(`La tarea ${tareas[i].titulo} esta ${tareas[i].estado}`)
         }
-    }),
-    
+    },
     crearTarea : (tarea) =>{
 
         let tareaYaExiste = false;
