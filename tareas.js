@@ -17,7 +17,7 @@ const acciones = ["\n1- Listar tareas existentes ->", "\n2- Crear nueva tarea ->
 
 const [nodeLista, nodeCrea, nodeElimina] = ["node app listar", "node app crear", "node app eliminar"]
 
-const [listarr, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow,acciones[2].yellow]
+const [listarr, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow, acciones[2].yellow]
 
 
 // FUNCIONES //
@@ -32,10 +32,28 @@ module.exports = {
     },
     
     listarTareas : () => {
+
         for(let i = 0; i < tareas.length; i++) {
-            return console.log(`La tarea ${tareas[i].titulo} esta ${tareas[i].estado}`)
+            const mostrarLista = [];
+            mostrarLista.push(tareas[i]);
+
+            if(`${mostrarLista[0].estado}` === "Pendiente"){
+            console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.red);
+            }
+
+            else if(`${mostrarLista[0].estado}` === "En proceso"){
+                console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.yellow);
+            }
+
+            else if(`${mostrarLista[0].estado}` === "Terminada"){
+                console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.green);                   
+            }
+
+            else{
+                return null;
+            }     
         }
-    },
+    },            
     crearTarea : (tarea) =>{
 
         let tareaYaExiste = false;
@@ -52,7 +70,7 @@ module.exports = {
         if(tareaYaExiste === false){
             tareas.push(tarea);
             fs.writeFileSync("./tareas.json", JSON.stringify(tareas, null, 3));
-            console.log("\nTarea agregada!".green);
+            console.log("\n¡Tarea agregada!".green);
             return tareas;
         }        
     },
@@ -72,9 +90,7 @@ module.exports = {
             
             fs.writeFileSync("./tareas.json", JSON.stringify(nuevoArr, null, 3));
             console.log("\nLa tarea ha sido eliminada.\n".red);
-            if(tareas ){
-                return "asdasd"
-            }
+            console.log()
             
         }else{
             return console.log("\nLa tarea no se encuentra.".red)

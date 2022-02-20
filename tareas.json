@@ -1,10 +1,22 @@
 [
    {
+      "id": 1,
       "titulo": "sacar al negro",
       "estado": "Pendiente"
    },
    {
+      "id": 2,
       "titulo": "cagar de nuevo",
+      "estado": "Pendiente"
+   },
+   {
+      "id": 3,
+      "titulo": "hacer la comida",
+      "estado": "En proceso"
+   },
+   {
+      "id": 4,
+      "titulo": "pelar la papota",
       "estado": "Pendiente"
    }
 ]

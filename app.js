@@ -26,6 +26,7 @@ switch (accion) {
             break;
         }
         let tarea = {
+
             titulo : descripcion,
             estado : "Pendiente"
         }
