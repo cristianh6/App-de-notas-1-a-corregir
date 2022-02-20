@@ -4,6 +4,6 @@
 
 Hasta función eliminar inclusive 
 
-Hasta listar con error - 20/2 10:57
+Hasta listar con error - 20/2 11:58
 
 
