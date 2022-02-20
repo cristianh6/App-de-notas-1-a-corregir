@@ -1,1 +1,10 @@
-[]
+[
+   {
+      "titulo": "lavar el auto",
+      "estado": "Pendiente"
+   },
+   {
+      "titulo": "sacar al negro",
+      "estado": "Pendiente"
+   }
+]

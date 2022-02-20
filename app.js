@@ -1,8 +1,9 @@
 // REQUERIMIENTOS //
 
-const process = require("process")
+const process = require("process");
+const tareas = require("./tareas");
 
-const {listarTareas, crearTarea, eliminarTarea} = require('./tareas');
+const {listarTareas, crearTarea, eliminarTarea, accionesDisponibles} = require('./tareas');
 
 
 // POSICIONAMIENTO // 
@@ -15,13 +16,13 @@ const descripcion = process.argv[3];
 // CONSOLA // 
 
 switch (accion) {
-    case "listar":
-        listarTareas();
+    case "listar".toLocaleLowerCase() :
+        listarTareas(tareas);
         break;
 
-    case "crear":
+    case "crear".toLocaleLowerCase() :
         if(!descripcion){
-            console.log("Debe escribir un titulo.".red)
+            console.log("\nDebe escribir un título para la tarea.".bgRed)
             break;
         }
         let tarea = {
@@ -31,12 +32,14 @@ switch (accion) {
         crearTarea(tarea);
         break;
 
-    case "eliminar" || "-".toLocaleLowerCase:
+    case "eliminar".toLocaleLowerCase() :
         eliminarTarea(descripcion);
         break;
 
     case undefined : 
-        console.log("Debes indicar una acción.".red)
+        console.log("¡Bienvenido a su Aplicación de tareas!".bgYellow.black);
+        console.log("\nDebe indicar una acción a realizar.".red);
+        accionesDisponibles();
         break;
     
     default:
