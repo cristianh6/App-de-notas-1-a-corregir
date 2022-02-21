@@ -22,25 +22,21 @@ switch (accion) {
 
     case "crear".toLocaleLowerCase() :
         if(!descripcion){
-            console.log("\nDebe escribir un título para la tarea.".bgRed)
-            break;
+            console.log("\nDebe escribir un título para la tarea a crear.".bgRed)
         }
-        let tarea = {
-
-            titulo : descripcion,
-            estado : "Pendiente"
-        }
-        crearTarea(tarea);
+        crearTarea(tareas);   
         break;
+        
 
     case "eliminar".toLocaleLowerCase() :
         eliminarTarea(descripcion);
+        
         break;
 
     case undefined : 
         console.log("¡Bienvenido a su Aplicación de tareas!".bgYellow.black);
         console.log("\nDebe indicar una acción a realizar.".red);
-        accionesDisponibles();
+        accionesDisponibles();        
         break;
     
     default:

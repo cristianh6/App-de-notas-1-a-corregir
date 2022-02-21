@@ -30,9 +30,8 @@ module.exports = {
             console.log("IMPORTANTE".red, "\nRecuerde especificar, luego de la acción a realizar, el título de la tarea entre comillas.")
             console.log("Todas las tareas que cree, serán almacenadas bajo el estado", "Pendiente".yellow+".");
     },
-    
-    listarTareas : () => {
 
+    listarTareas : () => {        
         for(let i = 0; i < tareas.length; i++) {
             const mostrarLista = [];
             mostrarLista.push(tareas[i]);
@@ -41,34 +40,37 @@ module.exports = {
             console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.red);
             }
 
-            else if(`${mostrarLista[0].estado}` === "En proceso"){
+            else if(`${mostrarLista}` === "En proceso"){
                 console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.yellow);
             }
 
             else if(`${mostrarLista[0].estado}` === "Terminada"){
                 console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.green);                   
             }
-
-            else{
-                return null;
-            }     
+                
         }
     },            
-    crearTarea : (tarea) =>{
+    crearTarea : (tareaNueva) =>{
 
         let tareaYaExiste = false;
         tareas.forEach( (elm) => {
-            if(elm.titulo === tarea.titulo){
+            if(elm.titulo === descripcion){
                 tareaYaExiste = true;
-                return console.log("\nSu tarea ya se encuentra listada.".yellow);
+                console.log("\nSu tarea ya se encuentra listada.".yellow);
             }
             else{
                 return null;
             }
-    }
-        )
+            })
+
         if(tareaYaExiste === false){
-            tareas.push(tarea);
+
+            tareaNueva = {
+                id : tareas.length -1 + 1,
+                titulo : descripcion,
+                estado : "Pendiente"            
+        }
+            tareas.push(tareaNueva);
             fs.writeFileSync("./tareas.json", JSON.stringify(tareas, null, 3));
             console.log("\n¡Tarea agregada!".green);
             return tareas;
@@ -77,23 +79,29 @@ module.exports = {
 
     eliminarTarea : (titulo) =>{
         if(!titulo){
-            return console.log("\nDebe especificar la tarea a eliminar.".bgRed)
+            return console.log("\nDebe especificar el id o el titulo de la tarea a eliminar.".bgRed);
         }
-        const tituloExiste = tareas.filter( (elemento) => {
-            return elemento.titulo === titulo;        
+
+        const tituloExiste = tareas.filter((elemento) => {
+            return elemento.titulo === titulo;
         })
    
         if(tituloExiste.length > 0){
-            const nuevoArr = tareas.filter( (elemento) => {
+            let nuevoArray = tareas.filter((elemento) => {
                 return elemento.titulo !== titulo;
-        })        
-            
-            fs.writeFileSync("./tareas.json", JSON.stringify(nuevoArr, null, 3));
+            })
+            fs.writeFileSync("./tareas.json", JSON.stringify(nuevoArray, null, 3));
             console.log("\nLa tarea ha sido eliminada.\n".red);
-            console.log()
-            
-        }else{
-            return console.log("\nLa tarea no se encuentra.".red)
+            if(tareas.length -1 === 0){
+                console.log("No hay más tareas para mostrar.".yellow)
+                console.log("\nPara más información, inserte".green, 'node app', "en consola.".green)
+            }
+            else{
+                console.log(`[${tareas}]`)
+            }
+        }
+        else{
+            console.log("\nLa tarea no se encuentra.".red)
         }
     }
 }
