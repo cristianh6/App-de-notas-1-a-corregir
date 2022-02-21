@@ -1,17 +1,17 @@
 [
   {
-    "id": 1645468849192,
+    "id": 1645469633266,
     "titulo": "limpiar",
-    "estado": "Pendiente"
+    "estado": "En proceso"
   },
   {
-    "id": 1645468862213,
+    "id": 1645479023893,
     "titulo": "barrer",
     "estado": "Pendiente"
   },
   {
-    "id": 1645468932327,
-    "titulo": "cocinar",
-    "estado": "Pendiente"
+    "id": 1645479023893,
+    "titulo": "barrer",
+    "estado": "Terminada"
   }
 ]

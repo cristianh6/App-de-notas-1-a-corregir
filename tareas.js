@@ -38,19 +38,19 @@ module.exports = {
             mostrarLista.push(tareas[i]);
 
             if(`${mostrarLista[0].estado}` === "Pendiente"){
-            console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.red);
+                console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".red, `${mostrarLista[0].titulo.cyan}`, "->".red, "Estado:", `${mostrarLista[0].estado}`.red);
             }
 
-            else if(`${mostrarLista}` === "En proceso"){
-                console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.yellow);
+            else if(`${mostrarLista[0].estado}` === "En proceso"){
+                console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".yellow, `${mostrarLista[0].titulo.cyan}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.yellow);
             }
 
             else if(`${mostrarLista[0].estado}` === "Terminada"){
-                console.log(tareas[i].id, "º".yellow, "Tarea:", `${mostrarLista[0].titulo.magenta}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.green);                   
-            }
-                
+                console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".green, `${mostrarLista[0].titulo.cyan}`, "->".green, "Estado:", `${mostrarLista[0].estado}`.green);                
+            }                
         }
-    },            
+    },       
+         
     crearTarea : (nuevaTarea) =>{
 
         let tareaYaExiste = false;
@@ -66,7 +66,6 @@ module.exports = {
                 return null;
             }
         })
-
             if(tareaYaExiste === false){
                 tareas.push(nuevaTarea)
                 guardarJson(tareas)
@@ -100,5 +99,8 @@ module.exports = {
         else{
             console.log("\nLa tarea no se encuentra.".red)
         }
-    }
+    },
+
+        /* filtrarTareas : (estado) => */
+
 }
