@@ -23,14 +23,18 @@ switch (accion) {
     case "crear".toLocaleLowerCase() :
         if(!descripcion){
             console.log("\nDebe escribir un título para la tarea a crear.".bgRed)
+            break;
         }
-        crearTarea(tareas);   
-        break;
-        
+        const nuevaTarea = {
+            id : new Date().getTime(),
+            titulo : descripcion,
+            estado : "Pendiente"
+        }
+        crearTarea(nuevaTarea);   
+        break;        
 
     case "eliminar".toLocaleLowerCase() :
-        eliminarTarea(descripcion);
-        
+        eliminarTarea(descripcion);        
         break;
 
     case undefined : 

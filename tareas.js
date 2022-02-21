@@ -19,6 +19,7 @@ const [nodeLista, nodeCrea, nodeElimina] = ["node app listar", "node app crear",
 
 const [listarr, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow, acciones[2].yellow]
 
+let guardarJson = (dato) => fs.writeFileSync('./tareas.json', JSON.stringify(dato,null,2),'utf-8')
 
 // FUNCIONES //
 
@@ -50,32 +51,28 @@ module.exports = {
                 
         }
     },            
-    crearTarea : (tareaNueva) =>{
+    crearTarea : (nuevaTarea) =>{
 
         let tareaYaExiste = false;
+
         tareas.forEach( (elm) => {
-            if(elm.titulo === descripcion){
+
+            if(elm.titulo === nuevaTarea.titulo){
                 tareaYaExiste = true;
-                console.log("\nSu tarea ya se encuentra listada.".yellow);
+                return console.log("\nSu tarea ya se encuentra listada.".yellow);
             }
+
             else{
                 return null;
             }
-            })
+        })
 
-        if(tareaYaExiste === false){
-
-            tareaNueva = {
-                id : tareas.length -1 + 1,
-                titulo : descripcion,
-                estado : "Pendiente"            
-        }
-            tareas.push(tareaNueva);
-            fs.writeFileSync("./tareas.json", JSON.stringify(tareas, null, 3));
-            console.log("\n¡Tarea agregada!".green);
-            return tareas;
-        }        
-    },
+            if(tareaYaExiste === false){
+                tareas.push(nuevaTarea)
+                guardarJson(tareas)
+                return console.log("\n¡Tarea agregada!".green);                
+            }         
+        },
 
     eliminarTarea : (titulo) =>{
         if(!titulo){
