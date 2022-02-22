@@ -3,7 +3,7 @@
 const process = require("process");
 const tareas = require("./tareas");
 
-const {listarTareas, crearTarea, eliminarTarea, accionesDisponibles} = require('./tareas');
+const {listarTareas, crearTarea, eliminarTarea, accionesDisponibles, filtrarTareas} = require('./tareas');
 
 
 // POSICIONAMIENTO // 
@@ -16,11 +16,11 @@ const descripcion = process.argv[3];
 // CONSOLA // 
 
 switch (accion) {
-    case "listar".toLocaleLowerCase() :
+    case "listar".toLocaleLowerCase():
         listarTareas();
         break;
 
-    case "crear".toLocaleLowerCase() :
+    case "crear".toLocaleLowerCase():
         if(!descripcion){
             console.log("\nDebe escribir un título para la tarea a crear.".bgRed)
             break;
@@ -33,8 +33,16 @@ switch (accion) {
         crearTarea(nuevaTarea);   
         break;        
 
-    case "eliminar".toLocaleLowerCase() :
+    case "eliminar".toLocaleLowerCase():
         eliminarTarea(descripcion);        
+        break;
+
+    case "filtrar".toLocaleLowerCase():
+        if(!descripcion){
+            console.log("\nDebe especificar el estado que desea filtrar.".bgRed)
+            break;
+        }
+        filtrarTareas();
         break;
 
     case undefined : 

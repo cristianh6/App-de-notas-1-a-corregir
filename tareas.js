@@ -47,7 +47,7 @@ module.exports = {
 
             else if(`${mostrarLista[0].estado}` === "Terminada"){
                 console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".green, `${mostrarLista[0].titulo.cyan}`, "->".green, "Estado:", `${mostrarLista[0].estado}`.green);                
-            }                
+            }           
         }
     },       
          
@@ -75,7 +75,7 @@ module.exports = {
 
     eliminarTarea : (titulo) =>{
         if(!titulo){
-            return console.log("\nDebe especificar el id o el titulo de la tarea a eliminar.".bgRed);
+            return console.log("\nDebe especificar el titulo de la tarea a eliminar.".bgRed);
         }
 
         const tituloExiste = tareas.filter((elemento) => {
@@ -86,14 +86,11 @@ module.exports = {
             let nuevoArray = tareas.filter((elemento) => {
                 return elemento.titulo !== titulo;
             })
-            fs.writeFileSync("./tareas.json", JSON.stringify(nuevoArray, null, 3));
+            guardarJson(nuevoArray);
             console.log("\nLa tarea ha sido eliminada.\n".red);
             if(tareas.length -1 === 0){
                 console.log("No hay más tareas para mostrar.".yellow)
                 console.log("\nPara más información, inserte".green, 'node app', "en consola.".green)
-            }
-            else{
-                console.log(`[${tareas}]`)
             }
         }
         else{
@@ -101,6 +98,23 @@ module.exports = {
         }
     },
 
-        /* filtrarTareas : (estado) => */
+        filtrarTareas : () => {
+            const arrayFiltrado = []
+            const estadosValidos = tareas.filter((elemento) => {     
+                return elemento.estado === tareas[0].estado;
+            })
+            arrayFiltrado.push(estadosValidos);
 
+                if(arrayFiltrado.includes(!descripcion)){
+                    console.log("No existen tareas con el estado especificado. Intente nuevamente.");
+                }
+                else if(arrayFiltrado.includes(descripcion)){
+                    return console.log(`${arrayFiltrado}`.green);
+                }
+                else{
+                    return null;
+                }
+    }
 }
+    
+
