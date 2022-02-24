@@ -4,9 +4,9 @@ const fs = require("fs");
 
 const tareas = require("./tareas.json");
 
-const descripcion = process.argv[3];
-
 const procesos = require("process");
+
+const descripcion = process.argv[3];
 
 const colores = require("colors");
 
@@ -20,6 +20,24 @@ const [nodeLista, nodeCrea, nodeElimina] = ["node app listar", "node app crear",
 const [listarr, crear, eliminar] = [acciones[0].yellow, acciones[1].yellow, acciones[2].yellow]
 
 let guardarJson = (dato) => fs.writeFileSync('./tareas.json', JSON.stringify(dato,null,2),'utf-8')
+
+/* let recorrer = function(mostrarLista){
+    for(let i = 0; i < tareas.length; i++) {
+    const mostrarLista = [];
+    mostrarLista.push(tareas[i]);
+
+    if(`${mostrarLista[0].estado}` === "Pendiente"){
+        console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".red, `${mostrarLista[0].titulo.cyan}`, "->".red, "Estado:", `${mostrarLista[0].estado}`.red);
+    }
+
+    else if(`${mostrarLista[0].estado}` === "En proceso"){
+        console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".yellow, `${mostrarLista[0].titulo.cyan}`, "->".yellow, "Estado:", `${mostrarLista[0].estado}`.yellow);
+    }
+
+    else if(`${mostrarLista[0].estado}` === "Terminada"){
+        console.log("\nID Tarea:".cyan, `${tareas[i].id}`.white, "->".green, `${mostrarLista[0].titulo.cyan}`, "->".green, "Estado:", `${mostrarLista[0].estado}`.green);                
+    }           
+} */
 
 // FUNCIONES //
 
@@ -99,22 +117,13 @@ module.exports = {
     },
 
         filtrarTareas : () => {
-            const arrayFiltrado = []
-            const estadosValidos = tareas.filter((elemento) => {     
-                return elemento.estado === tareas[0].estado;
-            })
-            arrayFiltrado.push(estadosValidos);
-
-                if(arrayFiltrado.includes(!descripcion)){
-                    console.log("No existen tareas con el estado especificado. Intente nuevamente.");
-                }
-                else if(arrayFiltrado.includes(descripcion)){
-                    return console.log(`${arrayFiltrado}`.green);
-                }
-                else{
-                    return null;
-                }
+            let arrayFiltrado = []
+            for(let i = 0; i < tareas.length; i++){
+                arrayFiltrado.push(tareas[i].estado)
+            }
+            if(arrayFiltrado.includes(descripcion) === true){
+                console.log("aaa")
+            }
+        }
     }
-}
-    
 

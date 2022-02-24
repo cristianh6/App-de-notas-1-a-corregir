@@ -1,6 +1,6 @@
 // REQUERIMIENTOS //
 
-const process = require("process");
+const process = require("process".toLowerCase());
 const tareas = require("./tareas");
 
 const {listarTareas, crearTarea, eliminarTarea, accionesDisponibles, filtrarTareas} = require('./tareas');
